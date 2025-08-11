@@ -27,9 +27,9 @@ public class myDao {
 		et.commit();
 	}
 	
-	public static Recruiter recruiterLogin(String orgName, String organizationPassword) {
-		Query query = em.createQuery("select re from Recruiter re where re.orgName = ?");
-		query.setParameter(1, orgName);
+	public static Recruiter recruiterLogin(String organizationName, String organizationPassword) {
+		Query query = em.createQuery("select re from Recruiter re where re.organizationName = ?1");
+		query.setParameter(1, organizationName);
 		Recruiter dbRecruiter = (Recruiter) query.getSingleResult();
 		if(dbRecruiter != null && dbRecruiter.getOrganizationPassword().equals(organizationPassword)) {
 			return dbRecruiter;
@@ -74,7 +74,7 @@ public class myDao {
 	}
 
 	public static Applicant applicantLogin(String email, String password) {
-		Query query = em.createQuery("select ap from applicant ap where ap.email = ?");
+		Query query = em.createQuery("select ap from applicant ap where ap.email = ?1");
 		query.setParameter(1, email);
 		Applicant applicant = (Applicant) query.getSingleResult();
 		if(applicant != null && applicant.getPassword().equals(password)) {
